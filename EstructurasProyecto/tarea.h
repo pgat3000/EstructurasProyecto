@@ -11,7 +11,7 @@ private:
 	double valor;
 public:
 	Tarea();
-	Tarea(int, int string, string, double);
+	Tarea(int, int, string, string, double);
 
 	int getDia();
 	int getMes();
