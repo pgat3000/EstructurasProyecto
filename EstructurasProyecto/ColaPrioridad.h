@@ -1,9 +1,12 @@
+
 #ifndef COLAPRIORIDAD_H
 #define COLAPRIORIDAD_H
 
 #define CAPACIDAD_MIN	5
+#include <list>
 
-// Cola de prioridad de máximos - almacena únicamente números enteros
+// Cola de prioridad de máximos de tipo TDA
+
 // Valor mayor tiene mayor prioridad
 class ColaPrioridad {
 public:
