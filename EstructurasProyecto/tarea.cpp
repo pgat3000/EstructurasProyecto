@@ -22,11 +22,11 @@ int Tarea::getMes() { return mes; }
 
 string Tarea::getCurso() { return nomb_curso; }
 
-string getDescrip() { return }
-double getValor();
+string Tarea::getDescrip() { return descrip; }
+double Tarea::getValor() { return valor; }
 
-void setDia(int);
-void setMes(int);
-void setCurso(string);
-void setDescrip(string);
-void setValor(double);
+void Tarea::setDia(int d) { dia = d; }
+void Tarea::setMes(int m) { mes = m; }
+void Tarea::setCurso(string c) { nomb_curso = c; }
+void Tarea::setDescrip(string desc) { descrip = desc; }
+void Tarea::setValor(double val) { valor = val; }
