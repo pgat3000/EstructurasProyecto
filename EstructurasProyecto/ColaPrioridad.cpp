@@ -1,66 +1,65 @@
 #include "ColaPrioridad.h"
 
-// Constructor a partir de un tamaño definido por el usuario
-ColaPrioridad::ColaPrioridad(int cantidad) : 
-	cola{nullptr}, capacidad{cantidad}, tam{0} {
-	cola = new int[capacidad];
-}
+
 
 // Constructor de copia
 ColaPrioridad::ColaPrioridad(ColaPrioridad& c) : 
-	cola{ nullptr }, capacidad{ c.capacidad }, tam{ c.tam } {
+	colaPrioridad{ nullptr }, capacidad{ c.capacidad }, tam{ c.tam } {
 
-	if (tam > capacidad) {
+	if (colaPrioridad->empty()) {
 		tam = 0;
 		capacidad = 0;
 	}
 	else {
-		cola = new int[capacidad];
-		for (int i = 0; i < tam; ++i) {
-			cola[i] = c.cola[i];
-		}
+		colaPrioridad = new  list<Tarea*>;
+		list <Tarea*> ::iterator it;
+		list<Tarea*>::iterator it2;
+		it2 = c.colaPrioridad->begin();
+		for (it = colaPrioridad->begin(); it != colaPrioridad->end(); ++it){
+			*it = *it2;
+		it2++;
 	}
-}
+	}	
+	}
+
 
 // Destructor - libera toda la memoria asignada a la cola de prioridad
 ColaPrioridad::~ColaPrioridad() {
-	delete[] cola;
+	delete[] colaPrioridad;
 	capacidad = 0;
 	tam = 0;
 }
 
-void ColaPrioridad::Agregar(int key) {
-	// Si ya se llegó a la capacidad máxima de la cola
-	// se incrementa el tamaño - se reasigna la memoria
-	if (tam == capacidad) {
-		ReasignarMemoria();
-	}
+void ColaPrioridad::Agregar(Tarea* t) {
+
 
 	// Insertamos en la última posición del array y se incrementa el tamaño
-	cola[tam++] = key;
+	colaPrioridad->push_back(t);
+	
 
 	SiftUp(tam - 1);
 }
 
 // Retorna el valor con mayor prioridad de la cola
-int ColaPrioridad::GetMax() {
+Tarea* ColaPrioridad::GetMax() {
 	if (tam > 0) {
-		return cola[0];
+		return colaPrioridad->front();
 	}
-	return -1;
+	return nullptr;
 }
 
 // Retorna el valor con mayor prioridad de la cola y lo elimina
-int ColaPrioridad::ExtraerMax() {
+Tarea* ColaPrioridad::ExtraerMax() {
 	if (tam < 0) {
-		return -1;
+		return nullptr;
 	}
 
 	// Intercambia el elemento con mayor prioridad de la cola con el último
 	// y procede a realizar un bubble down para mantener la propiedad de heap
-	int tmp = cola[0];
-	cola[0] = cola[tam - 1];
-	--tam;
+	Tarea* tmp = colaPrioridad->front();
+	*colaPrioridad->begin() = *colaPrioridad->end();
+	colaPrioridad->pop_back;
+	
 	MaxHeapify(0);
 	return tmp;
 }

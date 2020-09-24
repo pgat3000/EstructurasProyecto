@@ -5,27 +5,28 @@
 #define CAPACIDAD_MIN	5
 #include <list>
 #include <iterator> 
+#include "tarea.h"
 // Cola de prioridad de máximos de tipo TDA
 
-// Valor mayor tiene mayor prioridad
+
 class ColaPrioridad {
 public:
-	ColaPrioridad() : capacidad{ CAPACIDAD_MIN }, tam{ 0 } { cola = new int[capacidad]; }
-	ColaPrioridad(int);
+	ColaPrioridad() : capacidad{ 0 }, tam{ 0 } { colaPrioridad = new  list<Tarea*>; }
+	//ColaPrioridad(int);
 	ColaPrioridad(ColaPrioridad&);
 	~ColaPrioridad();
 
-	void Agregar(int);
-	int GetMax();
-	int ExtraerMax();
+	void Agregar(Tarea*);
+	Tarea* GetMax();
+	Tarea* ExtraerMax();
 	void IncrementarLlave(int, int);
 
 
 
 private:
 	// Estructura para almacenar los elementos de la cola
-	int* cola;
-	//list<>
+	//int* cola;
+	list<Tarea*>* colaPrioridad;
 	int capacidad;
 	int tam;
 

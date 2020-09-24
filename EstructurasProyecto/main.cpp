@@ -1,9 +1,7 @@
 #include <iostream>
-
+#include "ColaPrioridad.h"
 int main() {
-	int i = 0;
-	std::cout << " i =" << i << std::endl;
-
+	ColaPrioridad* temp = new ColaPrioridad();
 	return 0;
 
 }
