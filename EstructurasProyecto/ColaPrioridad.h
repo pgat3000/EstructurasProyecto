@@ -1,9 +1,12 @@
+
 #ifndef COLAPRIORIDAD_H
 #define COLAPRIORIDAD_H
 
 #define CAPACIDAD_MIN	5
+#include <list>
+#include <iterator> 
+// Cola de prioridad de máximos de tipo TDA
 
-// Cola de prioridad de máximos - almacena únicamente números enteros
 // Valor mayor tiene mayor prioridad
 class ColaPrioridad {
 public:
@@ -22,6 +25,7 @@ public:
 private:
 	// Estructura para almacenar los elementos de la cola
 	int* cola;
+	//list<>
 	int capacidad;
 	int tam;
 
