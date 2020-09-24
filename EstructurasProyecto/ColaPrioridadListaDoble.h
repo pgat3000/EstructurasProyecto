@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 using namespace std;
-class ListaDoble {
+template<class T>class ColaPrioridadListaDoble {
 private:
 	struct Nodo {
 		int valor;
@@ -12,8 +12,8 @@ private:
 
 public:	Nodo* inicio;
 	  typedef Nodo* iterador;
-	  ListaDoble();
-	  virtual ~ListaDoble();
+	  ColaPrioridadListaDoble();
+	  virtual ~ColaPrioridadListaDoble();
 	  void insertar(int val);
 	  void insertarPos(int val, int pos);
 	  void Borrar(int pos);
@@ -25,9 +25,10 @@ public:	Nodo* inicio;
 	  void InvertirLista(Nodo*& actual);
 	  void InvertirListaRecursivo(Nodo*& actual, Nodo* sig, Nodo* tmp);
 };
-
-ListaDoble::ListaDoble() { inicio = nullptr; }
-void ListaDoble::eliminarLista() {
+template<class T>
+ColaPrioridadListaDoble<T>::ColaPrioridadListaDoble() { inicio = nullptr; }
+template<class T>
+void ColaPrioridadListaDoble<T>::eliminarLista() {
 	Nodo* tmp;
 	while (inicio != nullptr) {
 		tmp = inicio;
@@ -35,11 +36,12 @@ void ListaDoble::eliminarLista() {
 		delete tmp;
 	}
 }
-ListaDoble::~ListaDoble() {
+template<class T>
+ColaPrioridadListaDoble<T>::~ColaPrioridadListaDoble() {
 	eliminarLista();
 }
-
-void ListaDoble::insertar(int val) {
+template<class T>
+void ColaPrioridadListaDoble<T>::insertar(int val) {
 	Nodo* nuevo;
 
 	nuevo = new Nodo(val);
@@ -58,8 +60,8 @@ void ListaDoble::insertar(int val) {
 
 }
 
-
-void ListaDoble::Borrar(int pos) {
+template<class T>
+void ColaPrioridadListaDoble<T>::Borrar(int pos) {
 	if (pos <= 0 || inicio == nullptr)
 		return;
 
@@ -86,7 +88,8 @@ void ListaDoble::Borrar(int pos) {
 		delete tmp2;
 	}
 }
-void ListaDoble::toString() {
+template<class T>
+void ColaPrioridadListaDoble<T>::toString() {
 	if (GetPrimerNodo() != nullptr) {
 		ListaDoble::iterador tmp = GetPrimerNodo();
 		while (tmp != nullptr) {
@@ -96,7 +99,8 @@ void ListaDoble::toString() {
 	}
 	std::cout << "\n\n";
 }
-void ListaDoble::InvertirLista(Nodo*& actual) {
+template<class T>
+void ColaPrioridadListaDoble<T>::InvertirLista(Nodo*& actual) {
 	Nodo* head = actual;
 	Nodo* sig = nullptr;
 	Nodo* tmp = nullptr;
@@ -116,7 +120,8 @@ void ListaDoble::InvertirLista(Nodo*& actual) {
 	head->prev = nullptr;
 	actual = head;
 }
-void ListaDoble::InvertirListaRecursivo(Nodo*& actual, Nodo* sig, Nodo* tmp) {
+template<class T>
+void ColaPrioridadListaDoble<T>::InvertirListaRecursivo(Nodo*& actual, Nodo* sig, Nodo* tmp) {
 	if (actual->next == nullptr) {
 		actual->next = tmp;
 		tmp->prev = actual;
@@ -136,8 +141,8 @@ void ListaDoble::InvertirListaRecursivo(Nodo*& actual, Nodo* sig, Nodo* tmp) {
 		InvertirListaRecursivo(actual, sig, tmp);
 	}
 }
-
-void ListaDoble::insertarPos(int val, int pos) {
+template<class T>
+void ColaPrioridadListaDoble<T>::insertarPos(int val, int pos) {
 	Nodo* nuevo;
 	Nodo* tmp2 = inicio;
 	nuevo = new Nodo(val);
