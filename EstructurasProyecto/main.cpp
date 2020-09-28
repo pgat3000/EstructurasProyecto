@@ -1,4 +1,10 @@
-//Nombre:Pablo Jose Gatgens Chaves
+/*
+Integrantes: 
+	Pablo Jose Gatgens Chaves
+	Joaquin Barrientos Monge
+*/
+
+
 #include <iostream>
 #include "ColaPrioridad.h"
 int main() {
