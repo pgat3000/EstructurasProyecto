@@ -1,14 +1,17 @@
 #pragma once
 #include <iostream>
 using namespace std;
+class Nodo {
+private:
+	int valor;
+	struct Nodo* prev;
+	struct Nodo* next;
+public:
+	Nodo(int v = 0, Nodo* n = nullptr, Nodo* n2 = nullptr) : valor{ v }, next{ n }, prev{ n2 } {}
+};
 template<class T>class ColaPrioridadListaDoble {
 private:
-	struct Nodo {
-		int valor;
-		struct Nodo* prev;
-		struct Nodo* next;
-		Nodo(int v = 0, Nodo* n = nullptr, Nodo* n2 = nullptr) : valor{ v }, next{ n }, prev{ n2 } {}
-	};
+	
 
 public:	Nodo* inicio;
 	  typedef Nodo* iterador;
@@ -21,12 +24,19 @@ public:	Nodo* inicio;
 	  iterador GetPrimerNodo() { return inicio; }
 	  iterador GetPrimerNodo() const { return inicio; }
 	  void toString();
-
+	  void swap(int x, int y);
+	  Nodo* index(int x);
 	  void InvertirLista(Nodo*& actual);
 	  void InvertirListaRecursivo(Nodo*& actual, Nodo* sig, Nodo* tmp);
 };
+
+
 template<class T>
 ColaPrioridadListaDoble<T>::ColaPrioridadListaDoble() { inicio = nullptr; }
+template<class T>
+Nodo* ColaPrioridadListaDoble<T>::index(int x) {
+
+}
 template<class T>
 void ColaPrioridadListaDoble<T>::eliminarLista() {
 	Nodo* tmp;
