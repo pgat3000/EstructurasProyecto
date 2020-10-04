@@ -1,177 +1,445 @@
-#pragma once
+#ifndef COLAPRIORIDADLISTADOBLE_H
+#define COLAPRIORIDADLISTADOBLE_H
+
+#include<sstream>
 #include <iostream>
+#include <string>
 using namespace std;
-class Nodo {
+//Nodo de La lista Doble-------------------------------------
+template<class T>
+class Nodo
+{
 private:
-	int valor;
-	struct Nodo* prev;
-	struct Nodo* next;
+	T* dataTemplate;
+	Nodo* sig;
+	Nodo* prev;
+	int SimulaPos;// simula posicion como en el array
 public:
-	Nodo(int v = 0, Nodo* n = nullptr, Nodo* n2 = nullptr) : valor{ v }, next{ n }, prev{ n2 } {}
+	Nodo(T*);
+	Nodo(T*, int);
+	T* getTemplateData();
+	Nodo* getSig();
+	Nodo* getPrev();
+	int getSimulaPos();
+	void setTemplateData(T*);
+	void setSig(Nodo<T>*);
+	void setPrev(Nodo<T>*);
+	void setSimulaPos(int pos);
+	virtual ~Nodo();
 };
-template<class T>class ColaPrioridadListaDoble {
+
+template<class T>
+Nodo<T>::Nodo(T* data) :dataTemplate(data){}
+template<class T>
+Nodo<T>::Nodo(T* _data, int pos)
+{
+	this->data = _data;
+	this->pos = pos;
+}
+template<class T>
+void Nodo<T>::setTemplateData(T* dataTemplate)
+{
+	this->dataTemplate = dataTemplate;
+}
+template<class T>
+T* Nodo<T>::getTemplateData()
+{
+	return dataTemplate;
+}
+
+template<class T>
+Nodo<T>* Nodo<T>::getSig()
+{
+	return sig;
+}
+
+template<class T>
+Nodo<T>* Nodo<T>::getPrev()
+{
+	return prev;
+}
+
+template<class T>
+int Nodo<T>::getSimulaPos()
+{
+	return SimulaPos;
+}
+
+
+template<class T>
+void Nodo<T>::setSimulaPos(int pos)
+{
+	SimulaPos = pos;
+}
+template<class T>
+void Nodo<T>::setSig(Nodo<T>* sig)
+{
+	this->sig = sig;
+}
+
+template<class T>
+void Nodo<T>::setPrev(Nodo<T>* prev)
+{
+	this->prev = prev;
+}
+template<class T>
+Nodo<T>::~Nodo()
+{
+	delete dataTemplate;
+}
+
+
+
+//Lista Doble de tipo Template Enlanzada------------------------------------------------------------------------------------------------------
+template<class T>
+class ListaDobleColaPrioridad
+{
 private:
-	
+	//
+	Nodo<T>* head;
+	Nodo<T>* tail;
+	string tipo;
+	int Simulacantidad;//simular una cantida conmo el array
+public:
+	//Metodos Basicos de la Lista Doble--------------------------------------------
+	ListaDobleColaPrioridad();
+	ListaDobleColaPrioridad(const ListaDobleColaPrioridad<T>&);
+	int getSimulaCantidad();
+	void setSimulaCantidad(int c);
+	Nodo<T>* getHead();
+	Nodo<T>* getTail();
+	bool EsVacia();
+	void push( T* TemplateData);
+	void pushEnd2(T* TemplateData);
+	void popfront();
+	void swap(int x, int y);
+	Nodo<T>* index(int x );
+	string toString();
+	virtual ~ListaDobleColaPrioridad();
+	//Metodos del Heap----------------------------------------------------------------
 
-public:	Nodo* inicio;
-	  typedef Nodo* iterador;
-	  ColaPrioridadListaDoble();
-	  virtual ~ColaPrioridadListaDoble();
-	  void insertar(int val);
-	  void insertarPos(int val, int pos);
-	  void Borrar(int pos);
-	  void eliminarLista();
-	  iterador GetPrimerNodo() { return inicio; }
-	  iterador GetPrimerNodo() const { return inicio; }
-	  void toString();
-	  void swap(int x, int y);
-	  Nodo* index(int x);
-	  void InvertirLista(Nodo*& actual);
-	  void InvertirListaRecursivo(Nodo*& actual, Nodo* sig, Nodo* tmp);
+	void crearHeap(string n);
+	int getPadre(int i);//no se usa
+	T* getLeft(int i);//no se usa
+	T* getRight(int i);//no se usa
+	void heapifyMax( int cant, int i);
+	void heapifyMin( int cant, int i);
+	void maxHeap();
+	void minHeap(int i);
+	void AgregarleHeap(T*);
+	void ElminardelHeap();
+
 };
-
+#endif
+template<class T>
+ListaDobleColaPrioridad<T>::ListaDobleColaPrioridad()
+{
+	head = nullptr;
+	tail = nullptr;
+	tipo = " ";
+	Simulacantidad = 0;
+}
 
 template<class T>
-ColaPrioridadListaDoble<T>::ColaPrioridadListaDoble() { inicio = nullptr; }
-template<class T>
-Nodo* ColaPrioridadListaDoble<T>::index(int x) {
+ListaDobleColaPrioridad<T>::ListaDobleColaPrioridad(const ListaDobleColaPrioridad<T>& list2)//Revisar
+{
+	if (list2.head == nullptr)
+	{
+		this->head = nullptr;
+	}
+	else
+	{
+		head = new Nodo<T>(list2.head->data, list2.head->pos);
+		Nodo<T>* aux = list2.head;
+		while (aux->getSig != nullptr)
+		{
+			head->sig = new Nodo<T> * (aux->sig->data, aux->sig->pos);
+			head->sig->prev = head;
+			aux = aux->sig;
+			head = head->sig;
+		}
+	}
 
 }
+
 template<class T>
-void ColaPrioridadListaDoble<T>::eliminarLista() {
-	Nodo* tmp;
-	while (inicio != nullptr) {
-		tmp = inicio;
-		inicio = inicio->next;
-		delete tmp;
+void ListaDobleColaPrioridad<T>::setSimulaCantidad(int c)
+{
+	Simulacantidad = c;
+}
+
+template<class T>
+int ListaDobleColaPrioridad<T>::getSimulaCantidad()
+{
+	return Simulacantidad;
+}
+
+template<class T>
+Nodo<T>* ListaDobleColaPrioridad<T>::getHead()
+{
+	return head;
+}
+
+
+template<class T>
+Nodo<T>* ListaDobleColaPrioridad<T>::getTail()
+{
+	return tail;
+}
+template<class T>
+bool ListaDobleColaPrioridad<T>::EsVacia()
+{
+	return !head;
+}
+
+template<class T>
+inline void ListaDobleColaPrioridad<T>::push( T* TemplateData)
+{
+	Nodo<T>* newH = new Nodo<T> * (TemplateData);
+	newH->setSig(head);
+	newH->setPrev(nullptr);
+
+	if (head != nullptr)
+	{
+		head->setPrev(newH);
+	}
+	head = newH;
+	newH->setPos(Simulacantidad++);
+}
+
+
+
+template<class T>
+void ListaDobleColaPrioridad<T>::pushEnd2(T* TemplateData)
+{
+	if (head == nullptr){
+		head = new Nodo<T>(TemplateData);
+		Simulacantidad = Simulacantidad++;
+		head->setSimulaPos(Simulacantidad);
+		tail = head;
+	}
+	else{
+
+		Nodo<T>* end = new Nodo<T>(TemplateData);
+		Nodo<T>* tmp = head;
+		while (tmp->getSig() != nullptr)
+		{
+
+			tmp = tmp->getSig();
+
+		}
+		tmp->setSig(end);
+		end->setPrev(tmp);
+		Simulacantidad = Simulacantidad++;
+		head->setSimulaPos(Simulacantidad);
+		tail = end;
+
 	}
 }
+
 template<class T>
-ColaPrioridadListaDoble<T>::~ColaPrioridadListaDoble() {
-	eliminarLista();
+void ListaDobleColaPrioridad<T>::popfront()//Sacar  el primero de la lista
+{
+	if (head == nullptr)
+	{
+		return;
+	}
+	head = head->getSig();
+	head->getPrev()->setSig(nullptr);
+	delete head->getPrev();
+	head->setPrev(nullptr);
+
+	
+	Nodo<T>* aux = head;
+	while (aux->getSig() != nullptr)
+	{
+		aux->setSimulaPos(aux->getSimulaPos() - 1);
+	}
+
+
 }
 template<class T>
-void ColaPrioridadListaDoble<T>::insertar(int val) {
-	Nodo* nuevo;
+Nodo<T>* ListaDobleColaPrioridad<T>::index(int x)
+{
+	if (EsVacia()) {
+		return nullptr;
+	}
+	if (x > Simulacantidad) {
+		return nullptr;
+	}
+	Nodo<T>* tmp = head;
+	if (x == 0) {
+		return head;
+	}
 
-	nuevo = new Nodo(val);
+	for (int i = 0; i < x; i++) {
+		tmp = tmp->getSig();
+	}
+	if (tmp != nullptr)
+		return tmp;
+	else
+		return nullptr;
+}
+template<class T>
+void ListaDobleColaPrioridad<T>::swap(int x , int y)// Hacer cambios entres nodos como se hace en arrays
+{
+	T* tmp = index(x)->getTemplateData();
+	index(x)->setTemplateData(index(y)->getTemplateData());
 
-	if (inicio == nullptr)
-		inicio = nuevo;
+	index(y)->setTemplateData(tmp);
+
+	tmp = nullptr;
+}
+
+
+//Imprimir Lista
+template<class T>
+string ListaDobleColaPrioridad<T>::toString()
+{
+	stringstream s;
+	Nodo<T>* tmp = this->head;
+	while (tmp){
+		s << tmp->getTemplateData()->toString() << endl;
+		tmp = tmp->getSig();
+	}
+	return s.str();
+
+}
+//Eliminar Lista
+template<class T>
+ListaDobleColaPrioridad<T>::~ListaDobleColaPrioridad()
+{
+	Nodo<T>* aux;
+	while (head != nullptr)
+	{
+		aux = head;
+		head = head->getSig();
+		delete aux;
+	}
+}
+//Metods del HEAP--------------------------------------------------
+template<class T>
+void ListaDobleColaPrioridad<T>::crearHeap(string n) {
+	if (n == "max") {
+		maxHeap();
+		tipo = "max";
+	}
 	else {
-		Nodo* tmp = inicio;
-		while (tmp->next != nullptr)
-			tmp = tmp->next;
-		tmp->next = nuevo;
-		nuevo->prev = tmp;
-
-
-	}
-
-}
-
-template<class T>
-void ColaPrioridadListaDoble<T>::Borrar(int pos) {
-	if (pos <= 0 || inicio == nullptr)
-		return;
-
-
-	Nodo* tmp2 = inicio;
-
-	// Si es la primera posición
-	if (pos == 1) {
-		Nodo* tmp2 = inicio;
-		inicio = inicio->next;
-		delete tmp2;
-		return;
-	}
-
-	// Para cualquier otro caso
-	for (size_t i = 1; i < pos; ++i) {
-		tmp2 = tmp2->next;;
-	}
-
-	if (tmp2 != nullptr) {
-		tmp2->prev->next = tmp2->next;
-		if (tmp2->next != nullptr)
-			tmp2->next->prev = tmp2->prev;
-		delete tmp2;
-	}
-}
-template<class T>
-void ColaPrioridadListaDoble<T>::toString() {
-	if (GetPrimerNodo() != nullptr) {
-		ListaDoble::iterador tmp = GetPrimerNodo();
-		while (tmp != nullptr) {
-			std::cout << tmp->valor << " ";
-			tmp = tmp->next;
+		if (n == "min") {
+			minHeap(getSimulaCantidad()-1);
+			tipo = "min";
 		}
 	}
-	std::cout << "\n\n";
 }
 template<class T>
-void ColaPrioridadListaDoble<T>::InvertirLista(Nodo*& actual) {
-	Nodo* head = actual;
-	Nodo* sig = nullptr;
-	Nodo* tmp = nullptr;
-	while (head->next) {
-		sig = head->next;
-		head->next = tmp;
-		if (head->next != nullptr) {
-			head->next = tmp;
-			tmp->prev = head;
-		}
-		tmp = head;
-		head = sig;
-		head->prev = nullptr;
+int ListaDobleColaPrioridad<T>::getPadre(int i)
+{
+	if (i < 0 || i > Simulacantidad)
+		return -1;
+
+	return (i - 1) / 2;
+}
+
+template<class T>
+T* ListaDobleColaPrioridad<T>::getLeft(int i)
+{
+	return index((2 * i) + 1)->getDataTemplate();
+}
+
+template<class T>
+T* ListaDobleColaPrioridad<T>::getRight(int i)
+{
+	return index((2 * i) + 2)->getDataTemplate();
+}
+//===========================================================================
+template<class T>
+
+void ListaDobleColaPrioridad<T>::maxHeap() {
+	int control = (Simulacantidad / 2) - 1;
+	for (int i = control; i >= 0; i--)
+	{
+		heapifyMax( Simulacantidad, i);
 	}
-	head->next = tmp;
-	tmp->prev = head;
-	head->prev = nullptr;
-	actual = head;
 }
 template<class T>
-void ColaPrioridadListaDoble<T>::InvertirListaRecursivo(Nodo*& actual, Nodo* sig, Nodo* tmp) {
-	if (actual->next == nullptr) {
-		actual->next = tmp;
-		tmp->prev = actual;
-		actual->prev = nullptr;
-		return;
+void ListaDobleColaPrioridad<T>::heapifyMax(int cant, int i) {
+	int mayor = i;
+	int izq = (2 * i) + 1;
+	int der = (2 * i) + 2;
+
+	if (izq < cant && index(izq)->getTemplateData() > index(mayor)->getTemplateData()){//Se comparan con Sobrecarga
+		mayor = izq;
+	}
+
+	if (der < cant && index(der)->getTemplateData() > index(mayor)->getTemplateData()){
+		mayor = der;
+	}
+
+	if (mayor != i){
+		swap(i,mayor);
+
+		heapifyMax( cant, mayor);
+	}
+}
+template<class T>
+void ListaDobleColaPrioridad<T>::minHeap(int i) {
+	int tmp = getPadre(i);
+	if (tmp > 0 && i > 0) {
+	cout << index(tmp)->getTemplateData()->getValor();
+	cout << index(i)->getTemplateData()->getValor()<<endl;
+}
+	while (i > 0 && index(tmp) > index(i)) 
+	{
+		
+		swap(i, tmp);
+		i = tmp;
+		tmp = getPadre(i);
+	}
+}
+template<class T>
+void ListaDobleColaPrioridad<T>::heapifyMin(int cant, int i) {
+	int menor = i;
+	int izq = (2 * i) + 1;
+	int der = (2 * i) + 2;
+
+	if (izq < cant && index(izq)->getTemplateData() < index(menor)->getTemplateData()) {//Se comparan con Sobrecarga
+		menor = izq;
+	}
+
+	if (der < cant && index(der)->getTemplateData() < index(menor)->getTemplateData()) {
+		menor = der;
+	}
+
+	if (menor != i) {
+		swap(i, menor);
+
+		heapifyMin(cant, menor);
+	}
+}
+template<class T>
+void ListaDobleColaPrioridad<T>::AgregarleHeap(T* newD) {
+	pushEnd2(newD);// modificar nombre 
+	if (tipo == "max") {
+		maxHeap();
 	}
 	else {
-		sig = actual->next;
-		actual->next = tmp;
-		if (actual->next != nullptr) {
-			actual->next = tmp;
-			tmp->prev = actual;
+		if (tipo == "min") {
+			minHeap(Simulacantidad-1);
+			//heapifyMin(Simulacantidad, 0);
 		}
-		tmp = actual;
-		actual = sig;
-		actual->prev = nullptr;
-		InvertirListaRecursivo(actual, sig, tmp);
 	}
+
 }
 template<class T>
-void ColaPrioridadListaDoble<T>::insertarPos(int val, int pos) {
-	Nodo* nuevo;
-	Nodo* tmp2 = inicio;
-	nuevo = new Nodo(val);
-
-	if (pos == 1) {
-		inicio->prev = nuevo;
-		nuevo->next = inicio;
-		inicio = nuevo;
-
+void ListaDobleColaPrioridad<T>::ElminardelHeap(){
+	popfront();
+	if (tipo == "max") {
+		maxHeap();
 	}
-	for (size_t i = 1; i < pos; ++i) {
-		tmp2 = tmp2->next;;
+	else {
+		if (tipo == "min") {
+			heapifyMin(Simulacantidad,0);
+		}
 	}
-	if (tmp2 != nullptr) {
-		nuevo->prev = tmp2->prev;
-		nuevo->next = tmp2;
-		tmp2->prev = nuevo;
-		nuevo->prev->next = nuevo;
-
-
-	}
+	
 }
