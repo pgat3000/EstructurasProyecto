@@ -124,7 +124,7 @@ public:
 	T* getRight(int i);//no se usa
 	void heapifyMax( int cant, int i);
 	void heapifyMin( int cant, int i);
-	void maxHeap();
+	void maxHeap(int i);
 	void minHeap(int i);
 	void AgregarleHeap(T*);
 	void ElminardelHeap();
@@ -321,7 +321,7 @@ ListaDobleColaPrioridad<T>::~ListaDobleColaPrioridad()
 template<class T>
 void ListaDobleColaPrioridad<T>::crearHeap(string n) {
 	if (n == "max") {
-		maxHeap();
+		maxHeap(Simulacantidad - 1);
 		tipo = "max";
 	}
 	else {
@@ -354,11 +354,14 @@ T* ListaDobleColaPrioridad<T>::getRight(int i)
 //===========================================================================
 template<class T>
 
-void ListaDobleColaPrioridad<T>::maxHeap() {
-	int control = (Simulacantidad / 2) - 1;
-	for (int i = control; i >= 0; i--)
+void ListaDobleColaPrioridad<T>::maxHeap(int i) {//esto aun no sirve
+	int tmp = getPadre(i);
+	while (i >= 0 && ((*index(tmp)->getTemplateData()) < (index(i)->getTemplateData())))
 	{
-		heapifyMax( Simulacantidad, i);
+		cout << " cambio " << endl;
+		swap(i, tmp);
+		i = tmp;
+		tmp = getPadre(i);
 	}
 }
 template<class T>
@@ -426,7 +429,7 @@ template<class T>
 void ListaDobleColaPrioridad<T>::AgregarleHeap(T* newD) {
 	pushEnd2(newD);// modificar nombre 
 	if (tipo == "max") {
-		maxHeap();
+		maxHeap(Simulacantidad - 1);
 	}
 	else {
 		if (tipo == "min") {

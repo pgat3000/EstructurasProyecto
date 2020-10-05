@@ -43,8 +43,8 @@ bool Tarea::operator>(Tarea* t) {
 		return false;
 	}
 }
-bool Tarea::operator<(Tarea& t) {
-	return (valor < t.getValor());
+bool Tarea::operator<(Tarea* t) {
+	return (valor < t->getValor());
 }
 bool Tarea::operator>=(Tarea& t) {
 	return valor >= t.getValor();

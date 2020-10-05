@@ -28,8 +28,8 @@ public:
 	string toString();
 	//operadores para comparar
 	bool operator==(Tarea& t);
-	bool operator>(Tarea*  );
-	bool operator<(Tarea& t);
+	bool operator>(Tarea* T );
+	bool operator<(Tarea* t);
 	bool operator>=(Tarea& t);
 	bool operator<=(Tarea& t);
 };
