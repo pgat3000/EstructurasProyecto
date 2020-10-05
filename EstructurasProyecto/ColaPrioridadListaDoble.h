@@ -326,7 +326,7 @@ void ListaDobleColaPrioridad<T>::crearHeap(string n) {
 	}
 	else {
 		if (n == "min") {
-			minHeap(getSimulaCantidad()-1);
+			minHeap(Simulacantidad-1);
 			tipo = "min";
 		}
 	}
@@ -337,7 +337,7 @@ int ListaDobleColaPrioridad<T>::getPadre(int i)
 	if (i < 0 || i > Simulacantidad)
 		return -1;
 
-	return (i - 1) / 2;
+	return (i-1) / 2;//probando
 }
 
 template<class T>
@@ -384,13 +384,19 @@ void ListaDobleColaPrioridad<T>::heapifyMax(int cant, int i) {
 template<class T>
 void ListaDobleColaPrioridad<T>::minHeap(int i) {
 	int tmp = getPadre(i);
-	if (tmp > 0 && i > 0) {
-	cout << index(tmp)->getTemplateData()->getValor();
-	cout << index(i)->getTemplateData()->getValor()<<endl;
-}
-	while (i > 0 && index(tmp) > index(i)) 
+	if (tmp >= 0 && i >= 0) {
+		cout << (index(tmp)->getTemplateData()->getValor()) << endl;
+		cout<<index(i)->getTemplateData()->getValor()<<endl;
+	if ((*index(tmp)->getTemplateData())> index(i)->getTemplateData()) {
+		cout << "mas grande " << endl;
+	}
+	else {
+		cout << "mas pequeno" << endl;
+	}
+     }
+	while (i >= 0 && ((*index(tmp)->getTemplateData()) > (index(i)->getTemplateData())))
 	{
-		
+		cout <<" cambio "<< endl;
 		swap(i, tmp);
 		i = tmp;
 		tmp = getPadre(i);

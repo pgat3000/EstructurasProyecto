@@ -9,26 +9,26 @@ private:
 	int mes;
 	string nomb_curso;
 	string descrip;
-	double valor;
+	int valor;
 public:
 	Tarea();
-	Tarea(int, int, string, string, double);
+	Tarea(int, int, string, string, int);
 
 	int getDia();
 	int getMes();
 	string getCurso();
 	string getDescrip();
-	double getValor();
+	int getValor();
 
 	void setDia(int);
 	void setMes(int);
 	void setCurso(string);
 	void setDescrip(string);
-	void setValor(double);
+	void setValor(int);
 	string toString();
 	//operadores para comparar
 	bool operator==(Tarea& t);
-	bool operator>(Tarea& t);
+	bool operator>(Tarea*  );
 	bool operator<(Tarea& t);
 	bool operator>=(Tarea& t);
 	bool operator<=(Tarea& t);

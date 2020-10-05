@@ -5,10 +5,10 @@ Tarea::Tarea() {
 	mes = 0;
 	nomb_curso = "";
 	descrip = "";
-	valor = 0.0;
+	valor = 0;
 }
 
-Tarea::Tarea(int d, int m, string cur, string desc, double val) {
+Tarea::Tarea(int d, int m, string cur, string desc, int val) {
 	this->dia = d;
 	this->mes = m;
 	this->nomb_curso = cur;
@@ -23,22 +23,28 @@ int Tarea::getMes() { return mes; }
 string Tarea::getCurso() { return nomb_curso; }
 
 string Tarea::getDescrip() { return descrip; }
-double Tarea::getValor() { return valor; }
+int Tarea::getValor() { return valor; }
 
 void Tarea::setDia(int d) { dia = d; }
 void Tarea::setMes(int m) { mes = m; }
 void Tarea::setCurso(string c) { nomb_curso = c; }
 void Tarea::setDescrip(string desc) { descrip = desc; }
-void Tarea::setValor(double val) { valor = val; }
+void Tarea::setValor(int val) { valor = val; }
 bool Tarea::operator==(Tarea& t) {
 	return valor == t.getValor();
 
 }
-bool Tarea::operator>(Tarea& t) {
-	return valor > t.getValor();
+bool Tarea::operator>(Tarea* t) {
+	//cout << getValor() + "<" + t->getValor() << endl;
+	if (valor >( t->getValor())) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 bool Tarea::operator<(Tarea& t) {
-	return valor > t.getValor();
+	return (valor < t.getValor());
 }
 bool Tarea::operator>=(Tarea& t) {
 	return valor >= t.getValor();
