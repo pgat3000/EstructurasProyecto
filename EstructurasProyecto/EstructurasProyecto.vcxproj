@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="ColaPrioridad.h" />
     <ClInclude Include="ColaPrioridadListaDoble.h" />
+    <ClInclude Include="Heap.h" />
     <ClInclude Include="Tareas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

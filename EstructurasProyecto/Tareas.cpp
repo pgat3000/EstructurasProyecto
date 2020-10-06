@@ -15,7 +15,13 @@ Tarea::Tarea(int d, int m, string cur, string desc, int val) {
 	this->descrip = desc;
 	this->valor = val;
 }
-
+Tarea::Tarea(const Tarea& t) {
+	this->dia = t.dia;
+	this->mes = t.mes;
+	this->nomb_curso = t.nomb_curso;
+	this->descrip = t.descrip;
+	this->valor = t.valor;
+}
 int Tarea::getDia() { return dia; }
 
 int Tarea::getMes() { return mes; }
@@ -55,7 +61,7 @@ bool Tarea::operator<=(Tarea& t) {
 
 string Tarea::toString() {//mejor codigo
 	stringstream s;
-	s << getCurso() << endl;
+	s << getCurso() << ": ";
 	s << getValor() << endl;
 	return s.str();
 }

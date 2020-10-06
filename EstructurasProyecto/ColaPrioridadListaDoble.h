@@ -118,16 +118,16 @@ public:
 	virtual ~ListaDobleColaPrioridad();
 	//Metodos del Heap----------------------------------------------------------------
 
-	void crearHeap(string n);
-	int getPadre(int i);//no se usa
-	T* getLeft(int i);//no se usa
-	T* getRight(int i);//no se usa
-	void heapifyMax( int cant, int i);
-	void heapifyMin( int cant, int i);
-	void maxHeap(int i);
-	void minHeap(int i);
-	void AgregarleHeap(T*);
-	void ElminardelHeap();
+	//void crearHeap(string n);
+	//int getPadre(int i);//no se usa
+	//T* getLeft(int i);//no se usa
+	//T* getRight(int i);//no se usa
+	//void heapifyMax( int cant, int i);
+	//void heapifyMin( int cant, int i);
+	//void maxHeap(int i);
+	//void minHeap(int i);
+	//void AgregarleHeap(T*);
+	//void ElminardelHeap();
 
 };
 #endif
@@ -254,6 +254,7 @@ void ListaDobleColaPrioridad<T>::popfront()//Sacar  el primero de la lista
 	while (aux->getSig() != nullptr)
 	{
 		aux->setSimulaPos(aux->getSimulaPos() - 1);
+		aux = aux->getSig();
 	}
 
 
@@ -318,137 +319,137 @@ ListaDobleColaPrioridad<T>::~ListaDobleColaPrioridad()
 	}
 }
 //Metods del HEAP--------------------------------------------------
-template<class T>
-void ListaDobleColaPrioridad<T>::crearHeap(string n) {
-	if (n == "max") {
-		maxHeap(Simulacantidad - 1);
-		tipo = "max";
-	}
-	else {
-		if (n == "min") {
-			minHeap(Simulacantidad-1);
-			tipo = "min";
-		}
-	}
-}
-template<class T>
-int ListaDobleColaPrioridad<T>::getPadre(int i)
-{
-	if (i < 0 || i > Simulacantidad)
-		return -1;
-
-	return (i-1) / 2;//probando
-}
-
-template<class T>
-T* ListaDobleColaPrioridad<T>::getLeft(int i)
-{
-	return index((2 * i) + 1)->getDataTemplate();
-}
-
-template<class T>
-T* ListaDobleColaPrioridad<T>::getRight(int i)
-{
-	return index((2 * i) + 2)->getDataTemplate();
-}
-//===========================================================================
-template<class T>
-
-void ListaDobleColaPrioridad<T>::maxHeap(int i) {//esto aun no sirve
-	int tmp = getPadre(i);
-	while (i >= 0 && ((*index(tmp)->getTemplateData()) < (index(i)->getTemplateData())))
-	{
-		cout << " cambio " << endl;
-		swap(i, tmp);
-		i = tmp;
-		tmp = getPadre(i);
-	}
-}
-template<class T>
-void ListaDobleColaPrioridad<T>::heapifyMax(int cant, int i) {
-	int mayor = i;
-	int izq = (2 * i) + 1;
-	int der = (2 * i) + 2;
-
-	if (izq < cant && index(izq)->getTemplateData() > index(mayor)->getTemplateData()){//Se comparan con Sobrecarga
-		mayor = izq;
-	}
-
-	if (der < cant && index(der)->getTemplateData() > index(mayor)->getTemplateData()){
-		mayor = der;
-	}
-
-	if (mayor != i){
-		swap(i,mayor);
-
-		heapifyMax( cant, mayor);
-	}
-}
-template<class T>
-void ListaDobleColaPrioridad<T>::minHeap(int i) {
-	int tmp = getPadre(i);
-	if (tmp >= 0 && i >= 0) {
-		cout << (index(tmp)->getTemplateData()->getValor()) << endl;
-		cout<<index(i)->getTemplateData()->getValor()<<endl;
-	if ((*index(tmp)->getTemplateData())> index(i)->getTemplateData()) {
-		cout << "mas grande " << endl;
-	}
-	else {
-		cout << "mas pequeno" << endl;
-	}
-     }
-	while (i >= 0 && ((*index(tmp)->getTemplateData()) > (index(i)->getTemplateData())))
-	{
-		cout <<" cambio "<< endl;
-		swap(i, tmp);
-		i = tmp;
-		tmp = getPadre(i);
-	}
-}
-template<class T>
-void ListaDobleColaPrioridad<T>::heapifyMin(int cant, int i) {
-	int menor = i;
-	int izq = (2 * i) + 1;
-	int der = (2 * i) + 2;
-
-	if (izq < cant && index(izq)->getTemplateData() < index(menor)->getTemplateData()) {//Se comparan con Sobrecarga
-		menor = izq;
-	}
-
-	if (der < cant && index(der)->getTemplateData() < index(menor)->getTemplateData()) {
-		menor = der;
-	}
-
-	if (menor != i) {
-		swap(i, menor);
-
-		heapifyMin(cant, menor);
-	}
-}
-template<class T>
-void ListaDobleColaPrioridad<T>::AgregarleHeap(T* newD) {
-	pushEnd2(newD);// modificar nombre 
-	if (tipo == "max") {
-		maxHeap(Simulacantidad - 1);
-	}
-	else {
-		if (tipo == "min") {
-			minHeap(Simulacantidad-1);
-			//heapifyMin(Simulacantidad, 0);
-		}
-	}
-
-}
-template<class T>
-void ListaDobleColaPrioridad<T>::ElminardelHeap(){
-	popfront();
-	if (tipo == "max") {
-		maxHeap();
-	}
-	else {
-		if (tipo == "min") {
-			heapifyMin(Simulacantidad,0);
-		}
-	}
-	
-}
+//template<class T>
+//void ListaDobleColaPrioridad<T>::crearHeap(string n) {
+//	if (n == "max") {
+//		maxHeap(Simulacantidad - 1);
+//		tipo = "max";
+//	}
+//	else {
+//		if (n == "min") {
+//			minHeap(Simulacantidad-1);
+//			tipo = "min";
+//		}
+//	}
+//}
+//template<class T>
+//int ListaDobleColaPrioridad<T>::getPadre(int i)
+//{
+//	if (i < 0 || i > Simulacantidad)
+//		return -1;
+//
+//	return (i-1) / 2;//probando
+//}
+//
+//template<class T>
+//T* ListaDobleColaPrioridad<T>::getLeft(int i)
+//{
+//	return index((2 * i) + 1)->getDataTemplate();
+//}
+//
+//template<class T>
+//T* ListaDobleColaPrioridad<T>::getRight(int i)
+//{
+//	return index((2 * i) + 2)->getDataTemplate();
+//}
+////===========================================================================
+//template<class T>
+//
+//void ListaDobleColaPrioridad<T>::maxHeap(int i) {//esto aun no sirve
+//	int tmp = getPadre(i);
+//	while (i >= 0 && ((*index(tmp)->getTemplateData()) < (index(i)->getTemplateData())))
+//	{
+//		cout << " cambio " << endl;
+//		swap(i, tmp);
+//		i = tmp;
+//		tmp = getPadre(i);
+//	}
+//}
+//template<class T>
+//void ListaDobleColaPrioridad<T>::heapifyMax(int cant, int i) {
+//	int mayor = i;
+//	int izq = (2 * i) + 1;
+//	int der = (2 * i) + 2;
+//
+//	if (izq < cant && index(izq)->getTemplateData() > index(mayor)->getTemplateData()){//Se comparan con Sobrecarga
+//		mayor = izq;
+//	}
+//
+//	if (der < cant && index(der)->getTemplateData() > index(mayor)->getTemplateData()){
+//		mayor = der;
+//	}
+//
+//	if (mayor != i){
+//		swap(i,mayor);
+//
+//		heapifyMax( cant, mayor);
+//	}
+//}
+//template<class T>
+//void ListaDobleColaPrioridad<T>::minHeap(int i) {
+//	int tmp = getPadre(i);
+//	if (tmp >= 0 && i >= 0) {
+//		cout << (index(tmp)->getTemplateData()->getValor()) << endl;
+//		cout<<index(i)->getTemplateData()->getValor()<<endl;
+//	if ((*index(tmp)->getTemplateData())> index(i)->getTemplateData()) {
+//		cout << "mas grande " << endl;
+//	}
+//	else {
+//		cout << "mas pequeno" << endl;
+//	}
+//     }
+//	while (i >= 0 && ((*index(tmp)->getTemplateData()) > (index(i)->getTemplateData())))
+//	{
+//		cout <<" cambio "<< endl;
+//		swap(i, tmp);
+//		i = tmp;
+//		tmp = getPadre(i);
+//	}
+//}
+//template<class T>
+//void ListaDobleColaPrioridad<T>::heapifyMin(int cant, int i) {
+//	int menor = i;
+//	int izq = (2 * i) + 1;
+//	int der = (2 * i) + 2;
+//
+//	if (izq < cant && index(izq)->getTemplateData() < index(menor)->getTemplateData()) {//Se comparan con Sobrecarga
+//		menor = izq;
+//	}
+//
+//	if (der < cant && index(der)->getTemplateData() < index(menor)->getTemplateData()) {
+//		menor = der;
+//	}
+//
+//	if (menor != i) {
+//		swap(i, menor);
+//
+//		heapifyMin(cant, menor);
+//	}
+//}
+//template<class T>
+//void ListaDobleColaPrioridad<T>::AgregarleHeap(T* newD) {
+//	pushEnd2(newD);// modificar nombre 
+//	if (tipo == "max") {
+//		maxHeap(Simulacantidad - 1);
+//	}
+//	else {
+//		if (tipo == "min") {
+//			minHeap(Simulacantidad-1);
+//			//heapifyMin(Simulacantidad, 0);
+//		}
+//	}
+//
+//}
+//template<class T>
+//void ListaDobleColaPrioridad<T>::ElminardelHeap(){
+//	popfront();
+//	if (tipo == "max") {
+//		heapifyMax(Simulacantidad, 0);
+//	}
+//	else {
+//		if (tipo == "min") {
+//			heapifyMin(Simulacantidad,0);
+//		}
+//	}
+//	
+//}

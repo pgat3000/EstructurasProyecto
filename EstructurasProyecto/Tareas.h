@@ -12,6 +12,7 @@ private:
 	int valor;
 public:
 	Tarea();
+	Tarea(const Tarea&);
 	Tarea(int, int, string, string, int);
 
 	int getDia();
