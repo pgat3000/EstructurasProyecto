@@ -7,9 +7,8 @@ Integrantes:
 
 #include <iostream>
 
+#include "Control.h"
 
-#include "Tareas.h"
-#include "ColaPrioridad.h"
 int main() {
 	
 	//ListaDobleColaPrioridad<Tarea>* tmp = new ListaDobleColaPrioridad<Tarea>;
