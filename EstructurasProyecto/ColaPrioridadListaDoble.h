@@ -276,6 +276,7 @@ Nodo<T>* ListaDobleColaPrioridad<T>::index(int x)
 	int i = 1;
 	while(i <= x && tmp->getSig()!= nullptr) {//for
 		tmp = tmp->getSig();
+
 		i++;
 
 	}
