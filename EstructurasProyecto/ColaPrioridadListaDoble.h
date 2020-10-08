@@ -112,6 +112,7 @@ public:
 	void push( T* TemplateData);
 	void pushEnd2(T* TemplateData);
 	void popfront();
+	void popback();
 	void swap(int x, int y);
 	Nodo<T>* index(int x );
 	string toString();
@@ -131,6 +132,24 @@ public:
 
 };
 #endif
+template<class T>
+void ListaDobleColaPrioridad<T>::popback() {
+	if (head == nullptr) {
+		return;
+	}
+	if (tail != nullptr) {
+
+		Nodo<T>* newtail = getTail()->getPrev();
+		
+		tail = nullptr;
+
+		newtail->setSig(nullptr);
+		tail = newtail;
+	}
+	else {
+		head = nullptr;
+	}
+}
 template<class T>
 ListaDobleColaPrioridad<T>::ListaDobleColaPrioridad()
 {
@@ -195,7 +214,7 @@ bool ListaDobleColaPrioridad<T>::EsVacia()
 template<class T>
 inline void ListaDobleColaPrioridad<T>::push( T* TemplateData)
 {
-	Nodo<T>* newH = new Nodo<T> * (TemplateData);
+	Nodo<T>* newH = new Nodo<T> (TemplateData);
 	newH->setSig(head);
 	newH->setPrev(nullptr);
 
@@ -204,7 +223,7 @@ inline void ListaDobleColaPrioridad<T>::push( T* TemplateData)
 		head->setPrev(newH);
 	}
 	head = newH;
-	newH->setPos(Simulacantidad++);
+	newH->setSimulaPos(0);//ultimo cambio 10/08/2020
 }
 
 
@@ -216,7 +235,7 @@ void ListaDobleColaPrioridad<T>::pushEnd2(T* TemplateData)
 		head = new Nodo<T>(TemplateData);
 	
 		head->setSimulaPos(Simulacantidad);
-		Simulacantidad = Simulacantidad++;
+		Simulacantidad = Simulacantidad+1;
 		tail = head;
 	}
 	else{
@@ -231,8 +250,9 @@ void ListaDobleColaPrioridad<T>::pushEnd2(T* TemplateData)
 		}
 		tmp->setSig(end);
 		end->setPrev(tmp);
-		Simulacantidad = Simulacantidad++;
+		
 		head->setSimulaPos(Simulacantidad);
+		Simulacantidad = Simulacantidad+1;
 		tail = end;
 
 	}
@@ -245,20 +265,28 @@ void ListaDobleColaPrioridad<T>::popfront()//Sacar  el primero de la lista
 	{
 		return;
 	}
+if (head->getSig()== nullptr) {
+	delete head;
+	head = nullptr;
+	setSimulaCantidad(Simulacantidad - 1);
+	return;
+	}
 	head = head->getSig();
-	head->getPrev()->setSig(nullptr);
-	delete head->getPrev();
-	head->setPrev(nullptr);
+	
+		head->getPrev()->setSig(nullptr);
+		delete head->getPrev();
+		head->setPrev(nullptr);
+		setSimulaCantidad(Simulacantidad - 1);
+
+
+		Nodo<T>* aux = head;
+		while (aux->getSig() != nullptr)
+		{
+			aux->setSimulaPos(aux->getSimulaPos() - 1);
+			aux = aux->getSig();
+		}
 
 	
-	Nodo<T>* aux = head;
-	while (aux->getSig() != nullptr)
-	{
-		aux->setSimulaPos(aux->getSimulaPos() - 1);
-		aux = aux->getSig();
-	}
-
-
 }
 template<class T>
 Nodo<T>* ListaDobleColaPrioridad<T>::index(int x)
@@ -274,7 +302,7 @@ Nodo<T>* ListaDobleColaPrioridad<T>::index(int x)
 		return head;
 	}
 	int i = 1;
-	while(i <= x && tmp->getSig()!= nullptr) {//for
+	while(i <= x && tmp->getSig()!= nullptr) {//for corregido
 		tmp = tmp->getSig();
 
 		i++;
@@ -307,6 +335,7 @@ string ListaDobleColaPrioridad<T>::toString()
 		s << tmp->getTemplateData()->toString() << endl;
 		tmp = tmp->getSig();
 	}
+	s << Simulacantidad << endl;
 	return s.str();
 
 }

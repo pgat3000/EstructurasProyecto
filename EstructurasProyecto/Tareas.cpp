@@ -58,7 +58,6 @@ bool Tarea::operator>=(Tarea& t) {
 bool Tarea::operator<=(Tarea& t) {
 	return valor <= t.getValor();
 }
-
 string Tarea::toString() {//mejor codigo
 	stringstream s;
 	s << getCurso() << ": ";
