@@ -140,9 +140,11 @@ void heap<T>::heapifyMin( int i) {
 	if (izq < lista->getSimulaCantidad() && (*lista->index(izq)->getTemplateData()) < lista->index(menor)->getTemplateData()) {//Se comparan con Sobrecarga
 		menor = izq;
 	}
-
+	cout << der << endl;
+cout << lista->index(der)->getTemplateData()->getValor() << endl;
 	if (der < lista->getSimulaCantidad() && (*lista->index(der)->getTemplateData() )< lista->index(menor)->getTemplateData()) {
 		menor = der;
+		
 	}
 
 	if (menor != i) {

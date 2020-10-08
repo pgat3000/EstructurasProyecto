@@ -214,8 +214,9 @@ void ListaDobleColaPrioridad<T>::pushEnd2(T* TemplateData)
 {
 	if (head == nullptr){
 		head = new Nodo<T>(TemplateData);
-		Simulacantidad = Simulacantidad++;
+	
 		head->setSimulaPos(Simulacantidad);
+		Simulacantidad = Simulacantidad++;
 		tail = head;
 	}
 	else{
@@ -272,9 +273,10 @@ Nodo<T>* ListaDobleColaPrioridad<T>::index(int x)
 	if (x == 0) {
 		return head;
 	}
-
-	for (int i = 0; i < x; i++) {
+	int i = 1;
+	while(i <= x && tmp->getSig()!= nullptr) {//for
 		tmp = tmp->getSig();
+		i++;
 	}
 	if (tmp != nullptr)
 		return tmp;
