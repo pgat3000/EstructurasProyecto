@@ -14,7 +14,7 @@ public:
 	int getPadre(int i);//no se usa
 	T* getLeft(int i);//no se usa
 	T* getRight(int i);//no se usa
-	void heapifyMax(int cant, int i);
+	void heapifyMax( int i);
 	void heapifyMin( int i);
 	void maxHeap(int i);
 	void minHeap(int i);
@@ -100,23 +100,23 @@ void heap<T>::maxHeap(int i) {//esto aun no sirve
 	}
 }
 template<class T>
-void heap<T>::heapifyMax(int cant, int i) {
+void heap<T>::heapifyMax(int i) {
 	int mayor = i;
 	int izq = (2 * i) + 1;
 	int der = (2 * i) + 2;
 
-	if (izq < cant && (*lista->index(izq)->getTemplateData()) > lista->index(mayor)->getTemplateData()) {//Se comparan con Sobrecarga
+	if (izq <  lista->getSimulaCantidad() && (*lista->index(izq)->getTemplateData()) > lista->index(mayor)->getTemplateData()) {//Se comparan con Sobrecarga
 		mayor = izq;
 	}
 
-	if (der < cant && (*lista->index(der)->getTemplateData() )> lista->index(mayor)->getTemplateData()) {
+	if (der <  lista->getSimulaCantidad() && (*lista->index(der)->getTemplateData() )> lista->index(mayor)->getTemplateData()) {
 		mayor = der;
 	}
 
 	if (mayor != i) {
 		lista->swap(i, mayor);
 
-		heapifyMax(cant, mayor);
+		heapifyMax(mayor);
 	}
 }
 template<class T>
@@ -173,11 +173,13 @@ T* heap<T>::ElminardelHeap() {
 	T* front = nullptr;
 	 front =new T(*lista->index(0)->getTemplateData());
 	lista->popfront();
-	lista->push(lista->getTail()->getTemplateData());
+	if (lista->getHead() != nullptr) {
+		lista->push(lista->getTail()->getTemplateData());
+	}
 	lista->popback();
 	if (tipo == "max") {
 		if (lista->getHead()!= nullptr) {
-			heapifyMax(lista->getSimulaCantidad(), 0);
+			heapifyMax( 0);
 			return front;
 		}
 		else {

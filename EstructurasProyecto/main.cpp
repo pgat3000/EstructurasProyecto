@@ -50,8 +50,8 @@ int main() {
 	colaP->insertar(t7);
 	colaP->insertar(t6);
 	
-	colaP->insertar(t1);
-	colaP->insertar(t2);
+	//colaP->insertar(t1);
+	//colaP->insertar(t2);
 	
 	//cout << colaP->toString() << endl;
 	colaP->insertar(t8);
