@@ -89,11 +89,10 @@ T* heap<T>::getRight(int i)
 //===========================================================================
 template<class T>
 
-void heap<T>::maxHeap(int i) {//esto aun no sirve
+void heap<T>::maxHeap(int i) {//esto aun no sirve siftup
 	int tmp = getPadre(i);
 	while (i >= 0 && ((*lista->index(tmp)->getTemplateData()) < (lista->index(i)->getTemplateData())))
 	{
-		cout << " cambio " << endl;
 		lista->swap(i, tmp);
 		i = tmp;
 		tmp = getPadre(i);
@@ -126,7 +125,6 @@ void heap<T>::minHeap(int i) {
 	
 	while (i >= 0 && ((*lista->index(tmp)->getTemplateData()) > (lista->index(i)->getTemplateData())))
 	{
-		cout << " cambio " << endl;
 		lista->swap(i, tmp);
 		i = tmp;
 		tmp = getPadre(i);
@@ -141,8 +139,7 @@ void heap<T>::heapifyMin( int i) {
 	if (izq <( lista->getSimulaCantidad()) && (*lista->index(izq)->getTemplateData()) < lista->index(menor)->getTemplateData()) {//Se comparan con Sobrecarga
 		menor = izq;
 	}
-	cout << der << endl;
-//cout << lista->index(der)->getTemplateData()->getValor() << endl;
+
 	if (der < (lista->getSimulaCantidad() ) && (*lista->index(der)->getTemplateData() )< lista->index(menor)->getTemplateData()) {
 		menor = der;
 		
@@ -162,8 +159,7 @@ void heap<T>::AgregarleHeap(T* newD) {
 	}
 	else {
 		if (tipo == "min") {
-			minHeap(lista->getSimulaCantidad()-1 );
-			
+			minHeap(lista->getSimulaCantidad()-1 );			
 		}
 	}
 
@@ -177,7 +173,7 @@ T* heap<T>::ElminardelHeap() {
 	lista->popback();
 	if (tipo == "max") {
 		if (lista->getHead()!= nullptr) {
-			heapifyMax( 0);
+			heapifyMax(0);
 			return front;
 		}
 		else {

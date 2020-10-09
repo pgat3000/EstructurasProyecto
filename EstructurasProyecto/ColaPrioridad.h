@@ -18,6 +18,7 @@ public:
 	void insertar(T*);
 	T* eliminar();
 	string toString();
+	heap<T>* retornarHeap();
 };
 template<class T>
 ColaPrioridad<T>::ColaPrioridad(){}
@@ -49,8 +50,13 @@ template<class T>
 T* ColaPrioridad<T>::eliminar() {
 	return heapD->ElminardelHeap();
 }
-template<class T>
 
+template<class T>
+heap<T>* ColaPrioridad<T>::retornarHeap() {
+	return heapD;
+}
+
+template<class T>
 string  ColaPrioridad<T>::toString() {
 	return heapD->getLista()->toString();
 }

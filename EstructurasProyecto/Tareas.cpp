@@ -41,7 +41,6 @@ bool Tarea::operator==(Tarea& t) {
 
 }
 bool Tarea::operator>(Tarea* t) {
-	//cout << getValor() + "<" + t->getValor() << endl;
 	if (valor >( t->getValor())) {
 		return true;
 	}
