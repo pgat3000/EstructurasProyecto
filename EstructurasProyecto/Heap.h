@@ -167,9 +167,11 @@ void heap<T>::AgregarleHeap(T* newD) {
 template<class T>
 T* heap<T>::ElminardelHeap() {
 	T* front = nullptr;
-	 front =new T(*lista->index(0)->getTemplateData());
+	front = new T(*lista->index(0)->getTemplateData());
 	lista->popfront();
-	lista->push(lista->getTail()->getTemplateData());
+	if (lista->getHead() != nullptr) {
+		lista->push(lista->getTail()->getTemplateData());
+	}	
 	lista->popback();
 	if (tipo == "max") {
 		if (lista->getHead()!= nullptr) {

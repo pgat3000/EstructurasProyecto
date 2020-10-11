@@ -117,18 +117,6 @@ public:
 	Nodo<T>* index(int x );
 	string toString();
 	virtual ~ListaDobleColaPrioridad();
-	//Metodos del Heap----------------------------------------------------------------
-
-	//void crearHeap(string n);
-	//int getPadre(int i);//no se usa
-	//T* getLeft(int i);//no se usa
-	//T* getRight(int i);//no se usa
-	//void heapifyMax( int cant, int i);
-	//void heapifyMin( int cant, int i);
-	//void maxHeap(int i);
-	//void minHeap(int i);
-	//void AgregarleHeap(T*);
-	//void ElminardelHeap();
 
 };
 #endif
@@ -338,6 +326,7 @@ string ListaDobleColaPrioridad<T>::toString()
 	return s.str();
 
 }
+
 //Eliminar Lista
 template<class T>
 ListaDobleColaPrioridad<T>::~ListaDobleColaPrioridad()
