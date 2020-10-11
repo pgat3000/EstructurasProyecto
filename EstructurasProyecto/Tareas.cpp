@@ -59,7 +59,10 @@ bool Tarea::operator<=(Tarea& t) {
 }
 string Tarea::toString() {//mejor codigo
 	stringstream s;
-	s << getCurso() << ": ";
-	s << getValor() << endl;
+	s << "\t\t\t- ";
+	s << getDescrip() << " de "; 
+	s << getCurso() << "(";
+	s << getValor() <<"%)" << " - "; 
+	s << getDia() << " del " << getMes() << endl;
 	return s.str();
 }
