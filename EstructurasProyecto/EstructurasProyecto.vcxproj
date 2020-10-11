@@ -138,7 +138,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ColaPrioridad.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tareas.cpp" />
   </ItemGroup>
